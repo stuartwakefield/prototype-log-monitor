@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<div id="logs"></div>
+<script>
+	var ws = new WebSocket("ws://localhost:8080");
+	ws.onmessage = function(ev) {
+		console.log(ev);
+	};
+</script>
