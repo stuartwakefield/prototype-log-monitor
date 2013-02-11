@@ -1,4 +1,3 @@
-prototype-log-monitor
-=====================
+# Log Monitor Prototype
 
-Building prototype for a log monitor using ZeroMQ and NodeJS
+Building prototype for a log monitor using ZeroMQ and NodeJS.
