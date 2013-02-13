@@ -1,8 +1,123 @@
 <!DOCTYPE html>
-<div id="logs"></div>
-<script>
-	var ws = new WebSocket("ws://localhost:8080");
-	ws.onmessage = function(ev) {
-		console.log(ev);
-	};
-</script>
+<html>
+	<head>
+		<style>
+		
+			@-webkit-keyframes fadeout {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0.2;
+				}
+			}
+			@keyframes fadeout {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0.2;
+				}
+			}
+		
+			body {
+				font: 1.25em / 1.75 Tahoma;
+				background: #eee;
+				color: #222;
+			}
+			#error {
+				padding: 5px;
+				text-align: center;
+				background: #c30;
+				color: #ffc;
+				display: none;
+			}
+			.error #error {
+				display: block;
+			}
+			#view {
+				opacity: 0.5;
+			}
+			.open #view {
+				opacity: 1;
+			}
+			.open #reconnect {
+				display: none;
+			}
+			#reconnect {
+				text-decoration: underline;
+				color: #09c;
+				cursor: pointer;
+			}
+			#logs {
+				border: 1px solid #ccc;
+				background: #fff;
+				border-radius: 10px;
+				padding: 20px;
+			}
+			#logs pre {
+				font: 0.675em / 1.25 Consolas;
+				color: #222;
+				margin: 0;
+				-webkit-animation: fadeout 10s 1;
+				-webkit-animation-fill-mode: forwards;
+				animation: fadeout 10s 1;
+				animation-fill-mode: forwards;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<div id="error"></div>
+		<a id="reconnect">Reconnect</a>
+		<div id="view">
+			<h1>Latest logs</h1>
+			<div id="logs"></div>
+		</div>
+		<script>
+		
+			var logs = document.getElementById("logs");
+			var view = document.getElementById("view");
+			var reconnect = document.getElementById("reconnect");
+			var error = document.getElementById("error");
+		
+			function setup() {
+		
+				var ws = new WebSocket("ws://" + window.location.host + ":8080", "echo-protocol");
+
+				ws.onopen = function(ev) {
+					document.body.setAttribute("class", "open");
+				};
+				
+				ws.onclose = function(ev) {
+					document.body.setAttribute("class", "error");
+					error.textContent = "Disconnected";
+				};
+			
+				ws.onmessage = function(ev) {
+			
+					var lines = ev.data.split(/\n/);
+					var fragment = document.createDocumentFragment();
+					lines.reverse();
+			
+					for(var i = 0; i < lines.length; ++i) {
+						var pre = document.createElement("pre");
+						
+						pre.textContent = lines[i];
+						
+						fragment.appendChild(pre);
+					}
+					
+					logs.insertBefore(fragment, logs.firstChild);
+
+				};
+			
+			}
+			
+			setup();
+			
+			reconnect.addEventListener("click", setup, false);
+			
+		</script>
+	</body>
+</html>
