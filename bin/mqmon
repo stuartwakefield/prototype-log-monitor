@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+var Monitor = require("mqmon");
+
+var map = {};
+for(var i = 2; i < process.argv.length; i += 2) {
+	var key = process.argv[i].match(/^-(\w)+$/);
+	var val = process.argv[i + 1];
+	console.log(key[1], val);
+}
+
+// Pass the -h parameter
+var host = process.argv[2] || "localhost";
+
+// Pass the -p parameter
+var port = process.argv[3] || 8080;
+
+var monitor = new Monitor(host, port);

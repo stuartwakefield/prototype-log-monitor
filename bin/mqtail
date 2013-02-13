@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+var Tail = require("../lib/mqtail");
+
+if(process.argv.length < 3)
+	throw new Error("The watcher must be started with a [filepath] to watch!");
+
+var file = process.argv[2];
+
+var watch = new Tail(file);

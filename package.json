@@ -1,0 +1,13 @@
+{ "name" :   
+	"mqmon"
+, "author" : 
+ 	"Stuart Wakefield <me@stuartwakefield.co.uk>"
+, "description" :
+ 	"Two applications, one tails log files and sends them to a MQ the other monitors the MQ and publishes it to Web Sockets"
+, "version" :
+ 	"0.0.0"
+, "main" :
+ 	"lib/mqmon"
+, "bin" :
+	{ "mqmon" : "bin/mqmon"
+	, "mqtail" : "bin/mqtail" } }
