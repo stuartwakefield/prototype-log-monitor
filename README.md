@@ -11,6 +11,6 @@ Then
 
     mqmon
 
-Serve up the monitor.html file (will add this to the server some time)
+Serve up the assets directory (will add this to the server some time)
 
 Add more watchers, add more monitors, add more clients... Have fun
