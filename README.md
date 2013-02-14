@@ -5,11 +5,11 @@ be nice to have this in Clojure and ZeroMQ...
 
 Usage
 
-    node watch.js /path/to/file.log
+    mqtail /path/to/file.log
 
 Then
 
-    node monitor.js
+    mqmon
 
 Serve up the monitor.html file (will add this to the server some time)
 

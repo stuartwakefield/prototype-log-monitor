@@ -10,4 +10,7 @@
  	"lib/mqmon"
 , "bin" :
 	{ "mqmon" : "bin/mqmon"
-	, "mqtail" : "bin/mqtail" } }
+	, "mqtail" : "bin/mqtail" }
+, "dependencies" :
+	{ "amqp" : "" 
+	, "websocket" : "" } }
